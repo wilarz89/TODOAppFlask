@@ -1,4 +1,8 @@
+#Entry point root file
 from flask import Flask
+
+from mongoengine import *
+connect('todoflaskdb')
 
 app = Flask(__name__)
 
@@ -10,4 +14,4 @@ def hello_world():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=4000)
