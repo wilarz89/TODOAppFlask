@@ -1,11 +1,18 @@
 {% extends "base.html" %}
-{% block title %}Home{% endblock %}
-{% block body %}
-<div class="jumbotron">
-  <h1>Todo App </h1>
-  <p class="lead">This is a Simple TODO app using flask</p>
-</div>
-       <body>
-        <h1>Hello, {{ user.username }}!</h1>
-    </body>
+
+{% block content %}
+    <h1>Sign In</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.username.label }}<br>
+            {{ form.username(size=32) }}
+        </p>
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}
+        </p>
+        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
 {% endblock %}

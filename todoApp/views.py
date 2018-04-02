@@ -1,6 +1,7 @@
 from flask import render_template
 
 from todoApp import app
+from todoApp.forms import LoginForm
 
 @app.route('/')
 
@@ -11,7 +12,7 @@ def index():
 def about():
     return render_template("about.html")
 
-@app.route('/todoApp')
-def todoApp():
-    user = {'username':'Wilson'}
-    return  render_template('login.html',title='Login',user=user)
+@app.route('/login')
+def login():
+    form = LoginForm()
+    return render_template('login.html', title='Sign In', form=form)
