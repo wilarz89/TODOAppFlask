@@ -1,7 +1,9 @@
 from flask import render_template,json
 from flask import flash,redirect,request,session,abort
 from app import app
-from flask_login import LoginManager
+from flask_login import LoginManager,current_user,login_user
+from app.models import User
+
 
 
 login_manager = LoginManager()
@@ -18,8 +20,8 @@ def index():
 def about():
     return render_template("about.html")
 
-@app.route('/login', methods=['POST'])
-def do_admin_login():
+@app.route('/login', methods=['GET','POST'])
+def login():
     if request.form['password'] == 'password' and request.form['username'] == 'admin':
         session['logged_in'] = True
     else:
