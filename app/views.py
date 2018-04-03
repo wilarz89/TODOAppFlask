@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template,json
 from flask import flash,redirect,request,session,abort
 from app import app
 from app.forms import LoginForm
@@ -27,3 +27,13 @@ def do_admin_login():
 def logout():
     session['logged_in'] = False
     return index()
+
+@app.route('/register')
+def signUp():
+    return render_template('register.html')
+
+@app.route('/registerUser', methods=['POST'])
+def signUpUser():
+    user =  request.form['username'];
+    password = request.form['password'];
+    return json.dumps({'status':'OK','user':user,'pass':password});
