@@ -11,7 +11,7 @@ connect('todoflaskdb')
 
 # all user models and database interactions
 class User(UserMixin,Document):
-    id = ObjectIdField(required=True)
+    id = ObjectIdField()
     email = EmailField(required=True,max_length=50, unique=True)
     first_name = StringField(max_length=50)
     last_name = StringField(max_length=50)
@@ -33,7 +33,7 @@ STATUS = (('D','Done'),
 
 
 class ToDoTasks(Document):
-    id = ObjectIdField(required=True)
+    id = ObjectIdField()
     description = StringField(required=True,max_length=500)
     dueDate = DateTimeField()
     dateCreated = DateTimeField(default= datetime.datetime.now)
@@ -44,7 +44,7 @@ class ToDoTasks(Document):
     meta = {'allow_inheritance': True}
 
 class DoneTasks(Document):
-    id = ObjectIdField(required=True)
+    id = ObjectIdField()
     description = StringField(required=True,max_length=500)
     dueDate = DateTimeField()
     dateCreated = DateTimeField(default= datetime.datetime.now)

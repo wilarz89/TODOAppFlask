@@ -1,6 +1,7 @@
 from flask import render_template,json
 from flask import flash,redirect,request,session,abort
 from app import app
+from mongoengine import *
 from flask_login import LoginManager,current_user,login_user
 from app.models import User
 
@@ -37,8 +38,12 @@ def logout():
 def register():
     return render_template('register.html')
 
-@app.route('/registerUser', methods=['POST'])
+@app.route('/registerUser', methods=['GET,''POST'])
 def registerUser():
-    user = request.form['username'];
-    password = request.form['password'];
-    return json.dumps({'status':'OK','user':user,'pass':password});
+    User.email = request.form['email']
+    User.password_hash = request.form['password']
+    User.first_name = request.form['first_name']
+    User.last_name =request.form['last_name']
+    User.id
+    User.save()
+    return render_template('register.html')
