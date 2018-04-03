@@ -29,11 +29,11 @@ def logout():
     return index()
 
 @app.route('/register')
-def signUp():
+def register():
     return render_template('register.html')
 
 @app.route('/registerUser', methods=['POST'])
-def signUpUser():
-    user =  request.form['username'];
+def registerUser():
+    user = request.form['username'];
     password = request.form['password'];
     return json.dumps({'status':'OK','user':user,'pass':password});
