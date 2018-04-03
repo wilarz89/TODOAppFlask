@@ -17,6 +17,8 @@ class User(UserMixin,Document):
     password = StringField(required=True,max_length=200)
 
 
+
+
 STATUS = (('D','Done'),
           ('T','ToDo'))
 
