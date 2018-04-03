@@ -1,7 +1,10 @@
 from flask import render_template,json
 from flask import flash,redirect,request,session,abort
 from app import app
-from app.forms import LoginForm
+from flask_login import LoginManager
+
+
+login_manager = LoginManager()
 
 @app.route('/')
 
@@ -9,7 +12,7 @@ def index():
     if not session.get('logged_in'):
         return render_template('login.html')
     else:
-        return "Welcome!"
+        return render_template('dashboard.html')
 
 @app.route('/about')
 def about():
