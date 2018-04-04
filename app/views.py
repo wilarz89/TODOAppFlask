@@ -54,7 +54,7 @@ def registeruser():
         first_name=request.form['first_name'],
         last_name=request.form['last_name']
     )
-    #user.set_password(request.form['password'])
+    # user.set_password(request.form['password'])
     user.save()
 
     return render_template('login.html')
@@ -73,4 +73,6 @@ def create_todo_item():
     )
     item.save()
     return render_template('dashboard.html')
+
+
 
