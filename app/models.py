@@ -1,4 +1,4 @@
-#Here we store the objects used in the app
+# Here we store the objects used in the app
 
 from mongoengine import *
 import datetime
@@ -21,6 +21,22 @@ class User(UserMixin,Document):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return str(self.id)
+
+    def __repr__(self):
+        return '<User %r>' % (self.email)
+
 
 @login.user_loader
 def load_user(id):

@@ -6,7 +6,7 @@ $ready(function(){
 		var lname = $('#last_name').val();
 
 		$.ajax({
-			url: '/registerUser',
+			url: '/register-user',
 			data: $('form').serialize(),
 			type: 'POST',
 			success: function(response){
