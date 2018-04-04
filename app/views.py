@@ -4,6 +4,9 @@ from app import app
 from mongoengine import *
 from flask_login import current_user,login_user, logout_user
 from app.models import User
+import logging
+
+
 
 @app.route('/')
 def index():
@@ -17,16 +20,18 @@ def about():
 
 @app.route('/login', methods=['GET','POST'])
 def login():
-    if current_user.is_authenticated ==True:
-        return redirect(url_for('dashboard'))
-    form = request.form
-    if form.validate_on_submit():
-        user = User.objects(username=form.username).first()
-        if user is None or not user.check_password(form.password):
-            flash('Invalid username or password')
-            return redirect(url_for('login'))
-        login_user(user, remember=form.remember_me)
-        return redirect(url_for('index'))
+    if request.method == 'GET':
+        return render_template('login.html')
+    email = request.form['email']
+    password = request.form['password']
+    registered_user = User.objects(username=email, password=password).first()
+    app.logger.info("enter ",registered_user)
+    print(registered_user)
+    if registered_user is None:
+        flash('Username or Password is invalid', 'error')
+        return render_template('login')
+    login_user(registered_user)
+    flash('Logged in successfully')
     return render_template('dashboard.html')
 
 
@@ -45,10 +50,11 @@ def register():
 def registeruser():
     user = User(
         email=request.form['email'],
+        password_hash=request.form['password'],
         first_name=request.form['first_name'],
         last_name=request.form['last_name']
     )
-    user.set_password(request.form['password'])
+    #user.set_password(request.form['password'])
     user.save()
 
     return render_template('login.html')

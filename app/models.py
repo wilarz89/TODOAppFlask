@@ -16,6 +16,7 @@ class User(UserMixin,Document):
     first_name = StringField(max_length=50)
     last_name = StringField(max_length=50)
     password_hash = StringField(required=True,max_length=200)
+
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
