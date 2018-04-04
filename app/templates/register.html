@@ -1,18 +1,20 @@
 {% extends "base.html" %}
-<link rel="stylesheet" href="/static/script.js" type="text/js">
+<script src="app/static/script.js" type="text/js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 {% block body %}
  <body>
 
      <div class="container">
 
-         <form class="form-signin" action="/register" method="post" role="form">
+         <form class="form-signin" action="/register-user" id="register" method="post">
              <h2 class="form-signin-heading">Please Sign Up </h2>
-             <input type="email" name="email" class="form-control" placeholder="Email address" required autofocus>
-             <input type="password" name="password" class="form-control" placeholder="Password" required>
-             <input type="first_name" name="first_name" class="form-control" placeholder="First Name" required>
-             <input type="last_name" name="last_name" class="form-control" placeholder="Last Name" required>
+             <input type="email" name="email" id="email" class="form-control" placeholder="Email address" required autofocus>
+             <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+             <input type="first_name" name="first_name" id="first_name" class="form-control" placeholder="First Name" required>
+             <input type="last_name" name="last_name" id="last_name" class="form-control" placeholder="Last Name" required>
 
-             <button class="button" type="button">Register </button>
+             <button class="button" type="submit">Register </button>
          </form>
 
      </div>

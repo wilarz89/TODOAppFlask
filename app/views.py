@@ -38,12 +38,14 @@ def logout():
 def register():
     return render_template('register.html')
 
-@app.route('/registerUser', methods=['GET,''POST'])
+@app.route('/register-user',methods=['POST'])
 def registerUser():
-    User.email = request.form['email']
-    User.password_hash = request.form['password']
-    User.first_name = request.form['first_name']
-    User.last_name =request.form['last_name']
-    User.id
-    User.save()
-    return render_template('register.html')
+    user = User(
+        email=request.form['email'],
+        first_name=request.form['first_name'],
+        last_name=request.form['last_name']
+    )
+    user.set_password(request.form['password'])
+    user.save()
+
+    return render_template('login.html')
