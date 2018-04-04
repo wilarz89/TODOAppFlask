@@ -3,7 +3,7 @@ from flask import flash,redirect,request,session,abort
 from app import app
 from mongoengine import *
 from flask_login import current_user,login_user, logout_user
-from app.models import User
+from app.models import User,TodoTasks
 import logging
 
 
@@ -46,7 +46,7 @@ def register():
     return render_template('register.html')
 
 
-@app.route('/register-user',methods=['POST'])
+@app.route('/register-user', methods=['POST'])
 def registeruser():
     user = User(
         email=request.form['email'],
@@ -58,3 +58,19 @@ def registeruser():
     user.save()
 
     return render_template('login.html')
+
+
+@app.route('/create-todo')
+def new_todo():
+    return render_template('new_todo.html')
+
+
+@app.route('/create_todo_item', methods=['POST'])
+def create_todo_item():
+    item = TodoTasks(
+        title=request.form['title'],
+        description=request.form['description']
+    )
+    item.save()
+    return render_template('dashboard.html')
+

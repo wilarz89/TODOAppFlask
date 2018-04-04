@@ -43,22 +43,25 @@ class User(UserMixin,Document):
 def load_user(id):
     return User.objects(pk=id).first()
 
-STATUS = (('D','Done'),
-          ('T','ToDo'))
+STATUS = (('D', 'Done'),
+          ('T', 'ToDo'))
 
 
-class ToDoTasks(Document):
-    description = StringField(required=True,max_length=500)
+class TodoTasks(Document):
+    title = StringField(required=True, max_length=50)
+    description = StringField(required=True, max_length=500)
     dueDate = DateTimeField()
-    dateCreated = DateTimeField(default= datetime.datetime.now)
+    dateCreated = DateTimeField(default=datetime.datetime.now)
     tags = ListField(StringField(max_length=30))
     active = StringField(max_length=2, choices=STATUS)
     timeWorked = DecimalField()
     user = ReferenceField(User,reverse_delete_rule=CASCADE)
     meta = {'allow_inheritance': True}
 
+
 class DoneTasks(Document):
-    description = StringField(required=True,max_length=500)
+    title = StringField(required=True, max_length=50)
+    description = StringField(required=True, max_length=500)
     dueDate = DateTimeField()
     dateCreated = DateTimeField(default= datetime.datetime.now)
     tags = ListField(StringField(max_length=30))

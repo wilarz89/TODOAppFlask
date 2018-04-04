@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block body %}
+  <form action="/create_todo_item" method=post id="create_todo_item" class="form-horizontal">
+    <h2>Create New Todo</h2>
+    <div class="control-group">
+        <div class="controls">
+          <input type="text" id="title" name="title" class="input-xlarge"
+            placeholder="Please give title to todo item" value="description"
+            required>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+          <textarea name="description" id="description" rows=10 class="input-xlarge" placeholder="describe the todo item" required></textarea>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+          <button type="submit" class="btn btn-success">Create Todo</button>
+        </div>
+    </div>
+  </form>
+    <a href="/create-todo">Back to list</a>
+{% endblock %}
