@@ -24,7 +24,7 @@ def login():
         return render_template('login.html')
     email = request.form['email']
     password = request.form['password']
-    registered_user = User.objects(username=email, password=password).first()
+    registered_user = User.objects(email=email, password_hash=password).first()
     app.logger.info("enter ",registered_user)
     print(registered_user)
     if registered_user is None:
