@@ -1,8 +1,8 @@
-from flask import render_template,json
+from flask import render_template,json,url_for
 from flask import flash,redirect,request,session,abort
 from app import app
 from mongoengine import *
-from flask_login import LoginManager,current_user,login_user
+from flask_login import LoginManager,current_user,login_user, logout_user
 from app.models import User
 
 
@@ -23,16 +23,22 @@ def about():
 
 @app.route('/login', methods=['GET','POST'])
 def login():
-    if request.form['password'] == 'password' and request.form['username'] == 'admin':
-        session['logged_in'] = True
-    else:
-        flash('wrong password!')
-    return index()
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = request.form
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid username or password')
+            return redirect(url_for('login'))
+        login_user(user, remember=form.remember_me.data)
+        return redirect(url_for('index'))
+    return render_template('login.html')
 
 @app.route("/logout")
 def logout():
-    session['logged_in'] = False
-    return index()
+    logout_user()
+    return redirect(url_for('index'))
 
 @app.route('/register')
 def register():

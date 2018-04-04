@@ -26,11 +26,6 @@ class User(UserMixin,Document):
 def load_user(id):
     return User.objects(pk=id).first()
 
-
-
-
-
-
 STATUS = (('D','Done'),
           ('T','ToDo'))
 

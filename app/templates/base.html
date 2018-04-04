@@ -23,6 +23,14 @@
       {% block body %}
       {% endblock %}
       <footer class="footer">
+      <div>
+        <a href="{{ url_for('index') }}">Home</a>
+        {% if current_user.is_anonymous %}
+        <a href="{{ url_for('login') }}">Login</a>
+        {% else %}
+        <a href="{{ url_for('logout') }}">Logout</a>
+        {% endif %}
+    </div>
         <p>© 2018 Wilson Javier Ariza Truque</p>
       </footer>
     </div> <!-- /container -->
